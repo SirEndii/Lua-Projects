@@ -4,7 +4,7 @@
 --- DateTime: 25.04.2021 20:44
 ---
 
-on = peripheral.wrap("top")
+mon = peripheral.wrap("top")
 me = peripheral.wrap("right")
 
 data = {
@@ -33,7 +33,7 @@ function addBars()
     for i=1, #cpus do
         x = 3*i
         full = (cpus[i].storage/65536) + cpus[i].coProcessors
-        bars.add(""..i,"ver", full, cpus[i].coProcessors, 4+x, 5, 2, 10, colors.lightBlue, colors.blue)
+        bars.add(""..i,"ver", full, cpus[i].coProcessors, 1+x, 5, 2, 10, colors.lightBlue, colors.blue)
         print("Test1 ".. full)
         print("Test2 ".. cpus[i].storage/65536)
     end
