@@ -106,5 +106,6 @@ while true do
         end
         -- print(i, v.coProcessors, v.isBusy, v.storage/65536)
     end
+    updateStats()
     sleep(2)
 end
