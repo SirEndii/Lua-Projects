@@ -9,8 +9,11 @@ me = peripheral.wrap("right")
 
 data = {
     cpus = 0,
+    oldCpus = 0,
     crafting = 0
 }
+
+local firstStart = true
 
 local monX, monY
 
@@ -86,6 +89,13 @@ function updateStats()
     mon.write("CPUs: ".. data.cpus)
     mon.setCursorPos(4,21)
     mon.write("Working: ".. data.crafting)
+
+    if not firstStart and not oldCpus == cpus then
+        bars.clear()
+        addBars()
+    end
+    oldCpus = cpus
+    firstStart = false
 end
 
 prepareMon()
