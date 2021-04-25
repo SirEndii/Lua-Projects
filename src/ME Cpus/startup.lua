@@ -34,8 +34,8 @@ function addBars()
         x = 3*i
         full = (cpus[i].storage/65536) + cpus[i].coProcessors
         bars.add(""..i,"ver", full, cpus[i].coProcessors, 1+x, 5, 2, 10, colors.lightBlue, colors.blue)
-        print("Test1 ".. full)
-        print("Test2 ".. cpus[i].storage/65536)
+        --print("Test1 ".. full)
+        --print("Test2 ".. cpus[i].storage/65536)
     end
     --bars.add("#0", "ver", 50, 20, 4, 5, 2, 9, colors.lightBlue, colors.blue)
     bars.construct(mon)
@@ -69,20 +69,28 @@ function drawBox(xMin, xMax, yMin, yMax, title, bcolor, tcolor)
     mon.setTextColor(colors.white)
 end
 
-function getData(cpu)
-    cpus=me.getCraftingCPUs()
-    for i=1,#cpus do
-        if i == cpu then
-            return cpus[i]
+function clear(xMin,xMax, yMin, yMax)
+    mon.setBackgroundColor(colors.black)
+    for xPos = xMin, xMax, 1 do
+        for yPos = yMin, yMax, 1 do
+            mon.write(" ")
         end
     end
-    return nil
+end
+
+function updateStats()
+    clear(3,37,19,24)
+    print("CPUs: ".. data.cpus)
+    print("Working: ".. data.crafting)
+    mon.setCursorPos(4,20)
+    mon.write("CPUs: ".. data.cpus)
+    mon.setCursorPos(4,21)
+    mon.write("Working: ".. data.crafting)
 end
 
 prepareMon()
 
 while true do
-    prepareMon()
     cpus = {}
     for k in pairs(me.getCraftingCPUs()) do
         table.insert(cpus, k)
@@ -98,11 +106,5 @@ while true do
         end
         -- print(i, v.coProcessors, v.isBusy, v.storage/65536)
     end
-    print("CPUs: ".. data.cpus)
-    print("Working: ".. data.crafting)
-    mon.setCursorPos(4,20)
-    mon.write("CPUs: ".. data.cpus)
-    mon.setCursorPos(4,21)
-    mon.write("Working: ".. data.crafting)
     sleep(2)
 end
