@@ -76,6 +76,7 @@ function clear(xMin,xMax, yMin, yMax)
     mon.setBackgroundColor(colors.black)
     for xPos = xMin, xMax, 1 do
         for yPos = yMin, yMax, 1 do
+            mon.setCursorPos(xPos, yPos)
             mon.write(" ")
         end
     end
