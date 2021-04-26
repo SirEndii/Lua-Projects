@@ -17,8 +17,6 @@ local firstStart = true
 
 local monX, monY
 
-os.loadAPI("bars")
-
 function prepareMon()
     mon.clear()
     mon.setBackgroundColor(colors.black)
@@ -92,7 +90,7 @@ function updateStats()
     mon.write("Working: ".. data.crafting)
 
     print("t: ".. tablelength(bars.getBars()))
-    if tablelength(bars.getBars()) ~= cpus then
+    if tablelength(bars.getBars()) ~= data.cpus then
         print("It works")
         bars.clear()
         addBars()
