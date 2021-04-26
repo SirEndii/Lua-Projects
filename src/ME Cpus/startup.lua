@@ -91,7 +91,9 @@ function updateStats()
     mon.setCursorPos(4,21)
     mon.write("Working: ".. data.crafting)
 
-    if not tablelength(bars.getBars()) == cpus then
+    print("t: ".. tablelength(bars.getBars()))
+    if tablelength(bars.getBars()) ~= cpus then
+        print("It works")
         bars.clear()
         addBars()
     end
