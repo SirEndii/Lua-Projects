@@ -111,7 +111,7 @@ function updateStats()
     mon.setCursorPos(4,22)
     mon.write("Fully occupied: ".. getUsage() .."%")
     mon.setCursorPos(4,23)
-    if moxX > 39 then
+    if monX > 39 then
         mon.write("Bytes(Total|Used): ".. comma_value(data.bytes) .." | ".. comma_value(data.bytesUsed))
     else
         mon.write("Bytes(Total|Used):")
