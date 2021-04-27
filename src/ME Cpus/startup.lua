@@ -19,6 +19,8 @@ local firstStart = true
 
 local monX, monY
 
+os.loadAPI("bars")
+
 function prepareMon()
     mon.clear()
     mon.setBackgroundColor(colors.black)
