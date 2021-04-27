@@ -95,6 +95,11 @@ function getUsage()
     return (data.crafting * 100) / data.cpus
 end
 
+function comma_value(n) -- credit http://richard.warburton.it
+    local left,num,right = string.match(n,'^([^%d]*%d)(%d*)(.-)$')
+    return left..(num:reverse():gsub('(%d%d%d)','%1,'):reverse())..right
+end
+
 function updateStats()
     clear(3,37,19,24)
     print("CPUs: ".. data.cpus)
@@ -106,8 +111,13 @@ function updateStats()
     mon.setCursorPos(4,22)
     mon.write("Fully occupied: ".. getUsage() .."%")
     mon.setCursorPos(4,23)
-    mon.write("Bytes(Total|Used): ".. data.bytes .."|".. data.bytesUsed)
-
+    if moxX > 39 then
+        mon.write("Bytes(Total|Used): ".. comma_value(data.bytes) .." | ".. comma_value(data.bytesUsed))
+    else
+        mon.write("Bytes(Total|Used):")
+        mon.setCursorPos(4,24)
+        mon.write(comma_value(data.bytes) .." | ".. comma_value(data.bytesUsed))
+    end
     if tablelength(bars.getBars()) ~= data.cpus then
         clear(3,37,4,15)
         bars.clear()
