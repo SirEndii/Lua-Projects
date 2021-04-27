@@ -41,6 +41,8 @@ function addBars()
         bars.add(""..i,"ver", full, cpus[i].coProcessors, 1+x, 5, 2, 10, colors.purple, colors.lightBlue)
         --print("Test1 ".. full)
         --print("Test2 ".. cpus[i].storage/65536)
+        mon.setCursorPos(x, 15)
+        mon.write(i)
     end
     --bars.add("#0", "ver", 50, 20, 4, 5, 2, 9, colors.lightBlue, colors.blue)
     bars.construct(mon)
