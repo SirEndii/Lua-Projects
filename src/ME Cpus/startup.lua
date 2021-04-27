@@ -35,8 +35,8 @@ function prepareMon()
     mon.write(label)
     mon.setTextScale(1)
     mon.setCursorPos(1,1)
-    drawBox(2, monX - 2, 3, monY - 10, "CPU's", colors.gray, colors.lightGray)
-    drawBox(2, monX - 2, monY - 8, monY - 1, "Stats", colors.gray, colors.lightGray)
+    drawBox(2, monX - 1, 3, monY - 10, "CPU's", colors.gray, colors.lightGray)
+    drawBox(2, monX - 1, monY - 8, monY - 1, "Stats", colors.gray, colors.lightGray)
     addBars()
 end
 
