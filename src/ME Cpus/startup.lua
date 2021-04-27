@@ -10,7 +10,9 @@ me = peripheral.wrap("right")
 data = {
     cpus = 0,
     oldCpus = 0,
-    crafting = 0
+    crafting = 0,
+    bytes = 0,
+    bytesUsed = 0
 }
 
 local firstStart = true
@@ -42,7 +44,7 @@ function addBars()
         --print("Test1 ".. full)
         --print("Test2 ".. cpus[i].storage/65536)
         mon.setCursorPos(x, 15)
-        mon.write(i)
+        mon.write(string.format(i))
     end
     --bars.add("#0", "ver", 50, 20, 4, 5, 2, 9, colors.lightBlue, colors.blue)
     bars.construct(mon)
@@ -105,7 +107,7 @@ function updateStats()
     mon.setCursorPos(4,21)
     mon.write("Working: ".. data.crafting)
     mon.setCursorPos(4,22)
-    mon.write("Fully occupied: ".. getUsage())
+    mon.write("Fully occupied: ".. getUsage() .."%")
 
     if tablelength(bars.getBars()) ~= data.cpus then
         clear(3,37,4,15)
@@ -125,11 +127,15 @@ while true do
     end
     data.cpus = 0
     data.crafting = 0
+    data.bytes = 0
+    data.bytesUsed = 0
     table.sort(cpus)
     for i = 1, #cpus do
         local k, v = cpus[i], me.getCraftingCPUs()[cpus[i]]
         data.cpus = data.cpus+1
+        data.bytes = data.bytes + v.storage
         if v.isBusy then
+            data.bytesUsed = data.bytesUsed + v.storage
             data.crafting = data.crafting+1
         end
         -- print(i, v.coProcessors, v.isBusy, v.storage/65536)
