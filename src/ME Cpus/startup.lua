@@ -24,6 +24,9 @@ os.loadAPI("bars")
 function prepareMon()
     mon.clear()
     monX, monY = mon.getSize()
+    if monX < 38 or monY < 25 then
+        error("Monitor is too small, we need a size of 39x and 26y minimum.")
+    end
     mon.setBackgroundColor(colors.black)
     mon.setCursorPos(13,1)
     mon.setTextScale(1)
@@ -40,8 +43,8 @@ function addBars()
     for i=1, #cpus do
         x = 3*i
         full = (cpus[i].storage/65536) + cpus[i].coProcessors
-        bars.add(""..i,"ver", full, cpus[i].coProcessors, 1+x, 5, 2, monY - 17, colors.purple, colors.lightBlue)
-        mon.setCursorPos(x+1, monY - 16)
+        bars.add(""..i,"ver", full, cpus[i].coProcessors, 1+x, 5, 2, monY - 16, colors.purple, colors.lightBlue)
+        mon.setCursorPos(x+1, monY - 15)
         mon.write(string.format(i))
     end
     bars.construct(mon)
