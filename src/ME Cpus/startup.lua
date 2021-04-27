@@ -91,7 +91,7 @@ function tablelength(T)
 end
 
 function getUsage()
-    return (data.crafting * 100) / data.cpus)
+    return (data.crafting * 100) / data.cpus
 end
 
 function updateStats()
