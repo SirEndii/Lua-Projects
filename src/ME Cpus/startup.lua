@@ -84,6 +84,16 @@ function clear(xMin,xMax, yMin, yMax)
     end
 end
 
+function tablelength(T)
+    local count = 0
+    for _ in pairs(T) do count = count + 1 end
+    return count
+end
+
+function getUsage()
+    return (data.crafting * 100) / data.cpus)
+end
+
 function updateStats()
     clear(3,37,19,24)
     print("CPUs: ".. data.cpus)
@@ -92,6 +102,8 @@ function updateStats()
     mon.write("CPUs: ".. data.cpus)
     mon.setCursorPos(4,21)
     mon.write("Working: ".. data.crafting)
+    mon.setCursorPos(4,22)
+    mon.write("Fully occupied: ".. getUsage())
 
     if tablelength(bars.getBars()) ~= data.cpus then
         clear(3,37,4,15)
@@ -100,12 +112,6 @@ function updateStats()
     end
     oldCpus = cpus
     firstStart = false
-end
-
-function tablelength(T)
-    local count = 0
-    for _ in pairs(T) do count = count + 1 end
-    return count
 end
 
 prepareMon()
