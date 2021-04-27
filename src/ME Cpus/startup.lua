@@ -40,8 +40,8 @@ function addBars()
     for i=1, #cpus do
         x = 3*i
         full = (cpus[i].storage/65536) + cpus[i].coProcessors
-        bars.add(""..i,"ver", full, cpus[i].coProcessors, 1+x, 5, 2, monY - 14, colors.purple, colors.lightBlue)
-        mon.setCursorPos(x+1, 15)
+        bars.add(""..i,"ver", full, cpus[i].coProcessors, 1+x, 5, 2, monY - 17, colors.purple, colors.lightBlue)
+        mon.setCursorPos(x+1, monY - 16)
         mon.write(string.format(i))
     end
     bars.construct(mon)
