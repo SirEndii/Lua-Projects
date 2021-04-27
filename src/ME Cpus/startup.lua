@@ -20,7 +20,7 @@ local monX, monY
 function prepareMon()
     mon.clear()
     mon.setBackgroundColor(colors.black)
-    mon.setCursorPos(8,1)
+    mon.setCursorPos(13,1)
     mon.setTextScale(1)
     mon.write("ME Crafting CPUs")
     mon.setTextScale(1)
