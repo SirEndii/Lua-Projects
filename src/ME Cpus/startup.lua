@@ -28,8 +28,6 @@ function prepareMon()
     mon.setTextScale(1)
     mon.setCursorPos(1,1)
     monX, monY = mon.getSize()
-    --drawBox(2,78,4,38,"CPU's", colors.gray, colors.lightGray)
-    --drawBox(2,78,40,50,"Stats", colors.gray, colors.lightGray)
     drawBox(2, 38, 3, 16, "CPU's", colors.gray, colors.lightGray)
     drawBox(2, 38, 18, 25, "Stats", colors.gray, colors.lightGray)
     addBars()
@@ -41,12 +39,9 @@ function addBars()
         x = 3*i
         full = (cpus[i].storage/65536) + cpus[i].coProcessors
         bars.add(""..i,"ver", full, cpus[i].coProcessors, 1+x, 5, 2, 10, colors.purple, colors.lightBlue)
-        --print("Test1 ".. full)
-        --print("Test2 ".. cpus[i].storage/65536)
         mon.setCursorPos(x+1, 15)
         mon.write(string.format(i))
     end
-    --bars.add("#0", "ver", 50, 20, 4, 5, 2, 9, colors.lightBlue, colors.blue)
     bars.construct(mon)
     bars.screen()
 end
