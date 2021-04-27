@@ -30,8 +30,8 @@ function prepareMon()
     mon.write("ME Crafting CPUs")
     mon.setTextScale(1)
     mon.setCursorPos(1,1)
-    drawBox(2, monX - 2, 3, monY - 8, "CPU's", colors.gray, colors.lightGray)
-    drawBox(2, monX - 2, monY - 6, monY - 1, "Stats", colors.gray, colors.lightGray)
+    drawBox(2, monX - 2, 3, monY - 10, "CPU's", colors.gray, colors.lightGray)
+    drawBox(2, monX - 2, monY - 8, monY - 1, "Stats", colors.gray, colors.lightGray)
     addBars()
 end
 
@@ -40,7 +40,7 @@ function addBars()
     for i=1, #cpus do
         x = 3*i
         full = (cpus[i].storage/65536) + cpus[i].coProcessors
-        bars.add(""..i,"ver", full, cpus[i].coProcessors, 1+x, 5, 2, monY - 10, colors.purple, colors.lightBlue)
+        bars.add(""..i,"ver", full, cpus[i].coProcessors, 1+x, 5, 2, monY - 14, colors.purple, colors.lightBlue)
         mon.setCursorPos(x+1, 15)
         mon.write(string.format(i))
     end
