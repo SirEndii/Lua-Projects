@@ -20,7 +20,11 @@ local monX, monY
 function prepareMon()
     mon.clear()
     mon.setBackgroundColor(colors.black)
+    mon.setCursorPos(8,1)
+    mon.setTextScale(2)
+    mon.write("ME Crafting CPUs")
     mon.setTextScale(1)
+    mon.setCursorPos(1,1)
     monX, monY = mon.getSize()
     --drawBox(2,78,4,38,"CPU's", colors.gray, colors.lightGray)
     --drawBox(2,78,40,50,"Stats", colors.gray, colors.lightGray)
@@ -34,7 +38,7 @@ function addBars()
     for i=1, #cpus do
         x = 3*i
         full = (cpus[i].storage/65536) + cpus[i].coProcessors
-        bars.add(""..i,"ver", full, cpus[i].coProcessors, 1+x, 5, 2, 10, colors.lightBlue, colors.blue)
+        bars.add(""..i,"ver", full, cpus[i].coProcessors, 1+x, 5, 2, 10, colors.lightBlue, colors.purple)
         --print("Test1 ".. full)
         --print("Test2 ".. cpus[i].storage/65536)
     end
