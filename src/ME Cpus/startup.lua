@@ -32,7 +32,7 @@ function prepareMon()
     mon.setBackgroundColor(colors.black)
     mon.setCursorPos((monX/2)-(#label/2),1)
     mon.setTextScale(1)
-    mon.write("ME Crafting CPUs")
+    mon.write(label)
     mon.setTextScale(1)
     mon.setCursorPos(1,1)
     drawBox(2, monX - 2, 3, monY - 10, "CPU's", colors.gray, colors.lightGray)
@@ -46,7 +46,7 @@ function addBars()
         x = 3*i
         full = (cpus[i].storage/65536) + cpus[i].coProcessors
         bars.add(""..i,"ver", full, cpus[i].coProcessors, 1+x, 5, 2, monY - 16, colors.purple, colors.lightBlue)
-        mon.setCursorPos(x+1, monY - 15)
+        mon.setCursorPos(x+1, monY - 11)
         mon.write(string.format(i))
     end
     bars.construct(mon)
