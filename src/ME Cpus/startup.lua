@@ -43,7 +43,7 @@ function addBars()
         bars.add(""..i,"ver", full, cpus[i].coProcessors, 1+x, 5, 2, 10, colors.purple, colors.lightBlue)
         --print("Test1 ".. full)
         --print("Test2 ".. cpus[i].storage/65536)
-        mon.setCursorPos(x, 15)
+        mon.setCursorPos(x+1, 15)
         mon.write(string.format(i))
     end
     --bars.add("#0", "ver", 50, 20, 4, 5, 2, 9, colors.lightBlue, colors.blue)
@@ -108,6 +108,8 @@ function updateStats()
     mon.write("Working: ".. data.crafting)
     mon.setCursorPos(4,22)
     mon.write("Fully occupied: ".. getUsage() .."%")
+    mon.setCursorPos(4,23)
+    mon.write("Bytes(Total|Used): ".. data.bytes .."|".. data.bytesUsed)
 
     if tablelength(bars.getBars()) ~= data.cpus then
         clear(3,37,4,15)
