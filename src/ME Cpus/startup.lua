@@ -17,6 +17,8 @@ data = {
 
 local firstStart = true
 
+local label = "ME Crafting CPUs"
+
 local monX, monY
 
 os.loadAPI("bars")
@@ -28,8 +30,7 @@ function prepareMon()
         error("Monitor is too small, we need a size of 39x and 26y minimum.")
     end
     mon.setBackgroundColor(colors.black)
-    test = 16/2
-    mon.setCursorPos((monX/3)+test,1)
+    mon.setCursorPos((monX/2)-(#label/2),1)
     mon.setTextScale(1)
     mon.write("ME Crafting CPUs")
     mon.setTextScale(1)
