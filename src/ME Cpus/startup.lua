@@ -47,7 +47,7 @@ function addBars()
         full = (cpus[i].storage/65536) + cpus[i].coProcessors
         bars.add(""..i,"ver", full, cpus[i].coProcessors, 1+x, 5, 2, monY - 16, colors.purple, colors.lightBlue)
         mon.setCursorPos(x+1, monY - 11)
-        mon.write(string.format(i))
+        --mon.write(string.format(i))
     end
     bars.construct(mon)
     bars.screen()
