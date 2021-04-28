@@ -112,9 +112,9 @@ function updateStats()
     mon.setCursorPos(4,monY-6)
     mon.write("CPUs: ".. data.cpus)
     mon.setCursorPos(4,monY-5)
-    mon.write("Working: ".. data.crafting)
+    mon.write("Busy: ".. data.crafting)
     mon.setCursorPos(4,monY-4)
-    mon.write("Fully occupied: ".. getUsage() .."%")
+    mon.write("Busy in percent: ".. math.floor(getUsage()) .."%")
     mon.setCursorPos(4,monY-3)
     if monX > 39 then
         mon.write("Bytes(Total|Used): ".. comma_value(data.bytes) .." | ".. comma_value(data.bytesUsed))
@@ -124,7 +124,7 @@ function updateStats()
         mon.write(comma_value(data.bytes) .." | ".. comma_value(data.bytesUsed))
     end
     if tablelength(bars.getBars()) ~= data.cpus then
-        clear(3,monX - 3,4,monY - 8)
+        clear(3,monX - 3,4,monY - 12)
         bars.clear()
         addBars()
     end
