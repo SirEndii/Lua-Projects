@@ -125,8 +125,7 @@ function updateStats()
     end
     if tablelength(bars.getBars()) ~= data.cpus then
         clear(3,monX - 3,4,monY - 12)
-        bars.clear()
-        addBars()
+        shell.run("reboot")
     end
     oldCpus = cpus
     firstStart = false
