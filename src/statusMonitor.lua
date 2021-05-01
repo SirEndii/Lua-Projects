@@ -80,8 +80,9 @@ while true do
         local y = 3*1
         print(k, v)
         clear(1, monX, 3, monY)
+        monitor.setTextColor(colors.white)
         monitor.setCursorPos(3, y)
-        monitor.write(v.label .."...")
+        monitor.write(v.label ..".. ")
         monitor.setTextColor(v.computer.isOn() and colors.green or colors.red)
         monitor.write(v.computer.isOn() and "Online" or "Offline")
     end
