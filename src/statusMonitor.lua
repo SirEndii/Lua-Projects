@@ -51,11 +51,12 @@ end
 function prepareMonitor()
     monitor.clear()
     monX, monY = monitor.getSize()
+    monitor.setTextColor(colors.white)
+    monitor.setBackgroundColor(colors.black)
     monitor.setCursorPos((monX/2)-(#label/2),1)
     monitor.setTextScale(1)
     monitor.write(label)
     monitor.setCursorPos(1,1)
-    monitor.setBackgroundColor(colors.black)
 end
 
 function clear(xMin,xMax, yMin, yMax)
