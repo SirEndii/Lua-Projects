@@ -108,7 +108,7 @@ end
 function updateStats()
     clear(3,monX - 3,monY - 5,monY - 2)
     print("CPUs: ".. data.cpus)
-    print("Working: ".. data.crafting)
+    print("busy: ".. data.crafting)
     mon.setCursorPos(4,monY-6)
     mon.write("CPUs: ".. data.cpus)
     mon.setCursorPos(4,monY-5)
