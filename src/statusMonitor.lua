@@ -34,6 +34,9 @@ computerList = {
 
 monitor = peripheral.wrap("top")
 
+local label = "Cliff OS"
+local monX, monY
+
 function prepareComputers()
     for k, v in pairs(computers) do
         for k1, v1 in pairs(computerList) do
@@ -45,16 +48,40 @@ function prepareComputers()
     end
 end
 
+function prepareMonitor()
+    monitor.clear()
+    monX, monY = monitor.size()
+    monitor.setCursorPos((monX/2)-(#label/2),1)
+    monitor.setTextScale(1)
+    monitor.write(label)
+    monitor.setCursorPos(1,1)
+    monitor.setBackgroundColor(colors.black)
+end
+
+function clear(xMin,xMax, yMin, yMax)
+    mon.setBackgroundColor(colors.black)
+    for xPos = xMin, xMax, 1 do
+        for yPos = yMin, yMax, 1 do
+            mon.setCursorPos(xPos, yPos)
+            mon.write(" ")
+        end
+    end
+end
+
+
 prepareComputers()
 
 while true do
+    sleep(0.5)
     table.sort(computerList)
-    for i = 1, #computerList do
-        local k, v = computerList[i], computerList[i]
+    for k, v in pairs(computerList) do
+        --local k, v = computerList[i], computerList[i]
         local y = 3*1
+        print(k, v)
+        clear(1, monX, 3, monY)
         monitor.setCursorPos(3, y)
-        monitor.write(computerList[i].label .."...")
-        Monitor.setTextColor(computerList[i].computer.isOn() and colors.green or colors.red)
-        Monitor.write(computerList[i].computer.isOn() and "Online" or "Offline")
+        monitor.write(v.label .."...")
+        monitor.setTextColor(v.computer.isOn() and colors.green or colors.red)
+        monitor.write(v.computer.isOn() and "Online" or "Offline")
     end
 end
