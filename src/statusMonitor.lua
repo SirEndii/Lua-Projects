@@ -83,7 +83,12 @@ while true do
         monitor.setTextColor(colors.white)
         monitor.setCursorPos(3, y)
         monitor.write(v.label ..".. ")
-        monitor.setTextColor(v.computer.isOn() and colors.green or colors.red)
-        monitor.write(v.computer.isOn() and "Online" or "Offline")
+        if computer == nil then
+            monitor.setTextColor(colors.red)
+            monitor.write("Could not found")
+        else
+            monitor.setTextColor(v.computer.isOn() and colors.green or colors.red)
+            monitor.write(v.computer.isOn() and "Online" or "Offline")
+        end
     end
 end
