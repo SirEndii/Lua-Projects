@@ -50,7 +50,7 @@ end
 
 function prepareMonitor()
     monitor.clear()
-    monX, monY = monitor.size()
+    monX, monY = monitor.getSize()
     monitor.setCursorPos((monX/2)-(#label/2),1)
     monitor.setTextScale(1)
     monitor.write(label)
