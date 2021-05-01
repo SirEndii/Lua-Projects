@@ -68,8 +68,8 @@ function clear(xMin,xMax, yMin, yMax)
     end
 end
 
-
 prepareComputers()
+prepareMonitor()
 
 while true do
     sleep(0.5)
