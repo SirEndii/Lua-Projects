@@ -59,11 +59,11 @@ function prepareMonitor()
 end
 
 function clear(xMin,xMax, yMin, yMax)
-    mon.setBackgroundColor(colors.black)
+    monitor.setBackgroundColor(colors.black)
     for xPos = xMin, xMax, 1 do
         for yPos = yMin, yMax, 1 do
-            mon.setCursorPos(xPos, yPos)
-            mon.write(" ")
+            monitor.setCursorPos(xPos, yPos)
+            monitor.write(" ")
         end
     end
 end
