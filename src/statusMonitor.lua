@@ -28,6 +28,33 @@ end
 
 computers = wrapPs("computer")
 
-for k, v in pairs(computers) do
-    print(k, v)
+computerList = {
+    me = {name="mecpu", label="Me CPUs", computer=nil}
+}
+
+monitor = peripheral.wrap("top")
+
+function prepareComputers()
+    for k, v in pairs(computers) do
+        for k1, v1 in pairs(computerList) do
+            if v.getLabel() == v1.name then
+                print(v1.label)
+                v1.computer = v
+            end
+        end
+    end
+end
+
+prepareComputers()
+
+while true do
+    table.sort(computerList)
+    for i = 1, #computerList do
+        local k, v = computerList[i], computerList[i]
+        local y = 3*1
+        monitor.setCursorPos(3, y)
+        monitor.write(computerList[i].label .."...")
+        Monitor.setTextColor(computerList[i].computer.isOn() and colors.green or colors.red)
+        Monitor.write(computerList[i].computer.isOn() and "Online" or "Offline")
+    end
 end
