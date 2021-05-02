@@ -51,8 +51,11 @@ end
 
 function showList()
     for name, table in pairs(programs) do
+        term.setTextColor(colors.green)
         write(name)
-        write("------")
+        term.setTextColor(colors.gray)
+        write(" -- ")
+        term.setTextColor(colors.lightBlue)
         write(table.desc .. "\n")
     end
 end
