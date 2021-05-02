@@ -17,7 +17,7 @@ function loadSources()
     local dl, error = http.get(githuburl)
 
     if dl then
-        programs = textutils.unserialize(dl.readAll())
+        programs = textutils.unserialise(dl.readAll())
         dl.close()
     else
         exit("Could not load programs.txt. Please contact srendi on github or discord.".. error)
