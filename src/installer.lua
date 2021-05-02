@@ -7,11 +7,10 @@
 local githuburl = "https://raw.githubusercontent.com/Seniorendi/Lua-Projects/master/src/Programs.txt"
 
 --TODO: Safe this in a file
-local firstStart = true
 
 programs = {}
 
-local args = {...}
+local args = { ... }
 
 function exit(message, error)
     term.setTextColor(error and colors.red or colors.yellow)
@@ -23,7 +22,7 @@ function exit(message, error)
 end
 
 function loadSources()
-    local dl, error = http.get("https://raw.githubusercontent.com/Seniorendi/Lua-Projects/master/src/Programs.txt?q=random_string")
+    local dl, error = http.get(githuburl)
     if dl then
         text = dl.readAll()
         text:gsub("\n", "")
@@ -34,9 +33,9 @@ end
 
 function startupInstall(program)
     if programs[program] == nil then
-        error("Program '"..program.."' does not exists!")
+        error("Program '" .. program .. "' does not exists!")
     elseif installed[program] == nil then
-        error("Program '"..program.."' is not installed!")
+        error("Program '" .. program .. "' is not installed!")
     end
 
     local startup = programs[program]["startup"]
@@ -44,9 +43,9 @@ function startupInstall(program)
     if fs.exists("startup") then
         fs.delete("startup")
     end
-        local sfile = fs.open("startup", "w")
-        sfile.write(startup)
-        sfile.close()
+    local sfile = fs.open("startup", "w")
+    sfile.write(startup)
+    sfile.close()
 
 end
 
@@ -54,8 +53,8 @@ function showHelp()
     term.setTextColor(colors.lightGray)
     print("---- [Installer] ----")
     term.setTextColor(colors.white)
-    print("installer help               - Shows this menu")
-    print("installer list <program> - Installs a program")
+    print("installer help              - Shows this menu")
+    print("installer list <program>    - Installs a program")
     print("installer install <program> - Installs a program")
     print("installer update <program>  - Updates a program")
     print("installer delete <program>  - Deletes a program")
@@ -93,19 +92,12 @@ function executeInput()
     elseif #args >= 1 and args[1] == "config" then
 
     elseif #args >= 1 then
-        exit("Could not find command '".. args[1] .."'", false)
+        exit("Could not find command '" .. args[1] .. "'", false)
     end
 end
 
-if firstStart then
-    print("Prepare first start...")
-    if fs.exists("startup") or fs.exists("startup.lua") then
-        exit("Delete the startup file and install this program as installer!", true)
-    end
-    print("Download sources... \n")
-    loadSources()
-    term.setTextColor(colors.lime)
-    write("Loaded programs \n")
-    term.setTextColor(colors.white)
-    executeInput()
+if fs.exists("startup") or fs.exists("startup.lua") then
+    exit("Delete the startup file and install this program as installer!", true)
 end
+loadSources()
+executeInput()
