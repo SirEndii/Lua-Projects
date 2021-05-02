@@ -13,6 +13,15 @@ programs = {}
 
 local args = {...}
 
+function exit(message, error)
+    term.setTextColor(error and colors.red or colors.yellow)
+    term.write(message .. "\n")
+    term.setTextColor(colors.white)
+    if error then
+        shell.exit()
+    end
+end
+
 function loadSources()
     local dl, error = http.get("https://raw.githubusercontent.com/Seniorendi/Lua-Projects/master/src/Programs.txt?q=random_string")
     if dl then
@@ -42,20 +51,25 @@ function startupInstall(program)
 end
 
 function showHelp()
+    term.setTextColor(colors.lightGray)
     print("---- [Installer] ----")
+    term.setTextColor(colors.white)
     print("installer help               - Shows this menu")
+    print("installer list <program> - Installs a program")
     print("installer install <program> - Installs a program")
     print("installer update <program>  - Updates a program")
     print("installer delete <program>  - Deletes a program")
     print("installer config <program>  - Configures a program after it is installed")
+    term.setTextColor(colors.lightGray)
     print("---- [=========] ----")
+    term.setTextColor(colors.white)
 end
 
 function showList()
     for name, table in pairs(programs) do
         term.setTextColor(colors.green)
         write(name)
-        term.setTextColor(colors.gray)
+        term.setTextColor(colors.lightGray)
         write(" -- ")
         term.setTextColor(colors.cyan)
         write(table.desc .. "\n")
@@ -72,17 +86,26 @@ function executeInput()
         showList()
     elseif #args >= 1 and args[1] == "install" then
         --Install the shit
+    elseif #args >= 1 and args[1] == "update" then
+
+    elseif #args >= 1 and args[1] == "delete" then
+
+    elseif #args >= 1 and args[1] == "config" then
+
+    elseif #args >= 1 then
+        exit("Could not find command '".. args[1] .."'", false)
     end
 end
 
 if firstStart then
     print("Prepare first start...")
     if fs.exists("startup") or fs.exists("startup.lua") then
-        error("Delete the startup file and install this program as installer!")
+        exit("Delete the startup file and install this program as installer!", true)
     end
     print("Download sources... \n")
     loadSources()
     term.setTextColor(colors.lime)
     write("Loaded programs \n")
+    term.setTextColor(colors.white)
     executeInput()
 end
