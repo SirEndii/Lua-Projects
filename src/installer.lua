@@ -42,11 +42,13 @@ function startupInstall(program)
 end
 
 function showHelp()
+    print("---- [Installer] ----")
     print("installer help               - Shows this menu")
     print("installer install <program> - Installs a program")
     print("installer update <program>  - Updates a program")
     print("installer delete <program>  - Deletes a program")
     print("installer config <program>  - Configures a program after it is installed")
+    print("---- [=========] ----")
 end
 
 function showList()
@@ -55,7 +57,7 @@ function showList()
         write(name)
         term.setTextColor(colors.gray)
         write(" -- ")
-        term.setTextColor(colors.lightBlue)
+        term.setTextColor(colors.cyan)
         write(table.desc .. "\n")
     end
 end
@@ -78,8 +80,9 @@ if firstStart then
     if fs.exists("startup") or fs.exists("startup.lua") then
         error("Delete the startup file and install this program as installer!")
     end
-    print("Download sources...")
+    print("Download sources... \n")
     loadSources()
-    print("Loaded programs")
+    term.setTextColor(colors.lime)
+    write("Loaded programs \n")
     executeInput()
 end
