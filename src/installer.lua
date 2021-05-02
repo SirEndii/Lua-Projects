@@ -13,17 +13,6 @@ programs = {}
 
 local args = {...}
 
-if firstStart then
-    print("Prepare first start...")
-    print("Download sources...")
-    loadSources()
-    --Create startup file
-    --TODO: This is just a test for the sources
-    for k, v in pairs(programs) do
-        print(k, v)
-    end
-end
-
 function loadSources()
     local dl, error = http.get(githuburl)
 
@@ -34,5 +23,20 @@ function loadSources()
         exit("Could not load programs.txt. Please contact srendi on github or discord.".. error)
     end
 end
+
+if firstStart then
+    print("Prepare first start...")
+    if fs.exists("startup") or fs.exists("startup.lua") then
+        exit("Delete the startup file and install this program as installer!")
+    end
+    print("Download sources...")
+    loadSources()
+    --Create startup file
+    --TODO: This is just a test for the sources
+    for k, v in pairs(programs) do
+        print(k, v)
+    end
+end
+
 
 --TODO
