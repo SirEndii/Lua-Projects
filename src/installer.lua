@@ -20,14 +20,14 @@ function loadSources()
         programs = textutils.unserialise(dl.readAll())
         dl.close()
     else
-        exit("Could not load programs.txt. Please contact srendi on github or discord.".. error)
+        error("Could not load programs.txt. Please contact srendi on github or discord.".. error)
     end
 end
 
 if firstStart then
     print("Prepare first start...")
     if fs.exists("startup") or fs.exists("startup.lua") then
-        exit("Delete the startup file and install this program as installer!")
+        error("Delete the startup file and install this program as installer!")
     end
     print("Download sources...")
     loadSources()
