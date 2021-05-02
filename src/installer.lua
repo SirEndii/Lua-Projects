@@ -14,16 +14,59 @@ programs = {}
 local args = {...}
 
 function loadSources()
-    local dl, error = http.get(githuburl)
-
+    local dl, error = http.get("https://raw.githubusercontent.com/Seniorendi/Lua-Projects/master/src/Programs.txt?q=random_string")
     if dl then
-        programs = textutils.unserialise(dl.readAll())
-        if programs == nil then
-            error("Could not load programs.txt. Please contact srendi on github or discord.")
-        end
-        dl.close()
-    else
-        error("Could not load programs.txt. Please contact srendi on github or discord.".. error)
+        text = dl.readAll()
+        text:gsub("\n", "")
+        text:gsub("\\", "")
+        programs = textutils.unserialize(text)
+    end
+end
+
+function startupInstall(program)
+    if programs[program] == nil then
+        error("Program '"..program.."' does not exists!")
+    elseif installed[program] == nil then
+        error("Program '"..program.."' is not installed!")
+    end
+
+    local startup = programs[program]["startup"]
+
+    if fs.exists("startup") then
+        fs.delete("startup")
+    end
+        local sfile = fs.open("startup", "w")
+        sfile.write(startup)
+        sfile.close()
+
+end
+
+function showHelp()
+    print("installer help               - Shows this menu")
+    print("installer install <program> - Installs a program")
+    print("installer update <program>  - Updates a program")
+    print("installer delete <program>  - Deletes a program")
+    print("installer config <program>  - Configures a program after it is installed")
+end
+
+function showList()
+    for name, table in pairs(programs) do
+        write(name)
+        write("------")
+        write(table.desc .. "\n")
+    end
+end
+
+function executeInput()
+    if #args <= 0 then
+        showHelp()
+    end
+    if #args >= 1 and args[1] == "help" then
+        showHelp()
+    elseif #args >= 1 and args[1] == "list" then
+        showList()
+    elseif #args >= 1 and args[1] == "install" then
+        --Install the shit
     end
 end
 
@@ -34,12 +77,6 @@ if firstStart then
     end
     print("Download sources...")
     loadSources()
-    --Create startup file
-    --TODO: This is just a test for the sources
-    for k, v in pairs(programs) do
-        print(k, v)
-    end
+    print("Loaded programs")
+    executeInput()
 end
-
-
---TODO
