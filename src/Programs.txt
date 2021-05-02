@@ -1,9 +1,9 @@
 {
     mecpus = {
         name = "ME CPU Control",
-        desc = "Program to control the applied energistics crafting cpus."
-        path = "mecpus"
-        version = "1.0.0"
+        desc = "Program to control the applied energistics crafting cpus.",
+        path = "mecpus",
+        version = "1.0.0",
         startup "shell.run('mecpus/mecpus.lua')",
         files = {
             {link="https://raw.githubusercontent.com/Seniorendi/Lua-Projects/master/src/ME%20Cpus/mecpus.cfg", name = "cfg"},

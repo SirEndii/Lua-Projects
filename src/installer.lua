@@ -18,6 +18,9 @@ function loadSources()
 
     if dl then
         programs = textutils.unserialise(dl.readAll())
+        if programs == nil then
+            error("Could not load programs.txt. Please contact srendi on github or discord.")
+        end
         dl.close()
     else
         error("Could not load programs.txt. Please contact srendi on github or discord.".. error)
