@@ -4,8 +4,35 @@
 --- DateTime: 02.05.2021 14:48
 ---
 
-local githuburl = "https://raw.githubusercontent.com/Seniorendi/Lua-Projects/master/"
+local githuburl = "https://raw.githubusercontent.com/Seniorendi/Lua-Projects/master/src/Programs.txt"
+
+--TODO: Safe this in a file
+local firstStart = true
+
+programs = {}
 
 local args = {...}
+
+if firstStart then
+    print("Prepare first start...")
+    print("Download sources...")
+    loadSources()
+    --Create startup file
+    --TODO: This is just a test for the sources
+    for k, v in pairs(programs) do
+        print(k, v)
+    end
+end
+
+function loadSources()
+    local dl, error = http.get(githuburl)
+
+    if dl then
+        programs = textutils.unserialize(dl.readAll())
+        dl.close()
+    else
+        exit("Could not load programs.txt. Please contact srendi on github or discord.".. error)
+    end
+end
 
 --TODO
