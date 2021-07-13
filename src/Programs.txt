@@ -6,8 +6,8 @@
         version = "1.0.0",
         startup = "shell.run('mecpus/mecpus.lua')",
         files = {
-            {link="https://raw.githubusercontent.com/Seniorendi/Lua-Projects/master/src/ME%20Cpus/mecpus.cfg", name = "cfg"},
-            {link="https://raw.githubusercontent.com/Seniorendi/Lua-Projects/master/src/ME%20Cpus/mecpus.lua", name = "mecpus.lua"},
+            {link="https://raw.githubusercontent.com/Seniorendi/Lua-Projects/master/src/ME%20Cpus/mecpus.cfg", name = "cfg", type = "config"},
+            {link="https://raw.githubusercontent.com/Seniorendi/Lua-Projects/master/src/ME%20Cpus/mecpus.lua", name = "mecpus.lua", type = "program"},
         },
         needs = {
             monitor = true,
