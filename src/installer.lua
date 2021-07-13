@@ -32,8 +32,6 @@ end
 function startupInstall(program)
     if programs[program] == nil then
         error("Program '" .. program .. "' does not exists!")
-    elseif installed[program] == nil then
-        error("Program '" .. program .. "' is not installed!")
     end
 
     local startup = programs[program]["startup"]
