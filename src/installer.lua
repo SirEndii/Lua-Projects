@@ -42,7 +42,17 @@ function startupInstall(program)
     local sfile = fs.open("startup", "w")
     sfile.write(startup)
     sfile.close()
-
+    
+    programName = ""
+    programPath = ""
+    for k, v in ipairs(programs[program]["files"]) do
+        if v.type == "program" then
+           programPath = v.link 
+           programName = v.name
+        end
+    end
+    
+    shell.run("wget ".. programPath .." ".. program .."/".. programName)
 end
 
 function showHelp()
@@ -97,7 +107,7 @@ function executeInput()
 end
 
 if fs.exists("startup") or fs.exists("startup.lua") then
-    exit("Delete the startup file and install this program as installer!", true)
+    exit("Delete the startup file and install this program as installer!", false)
 end
 loadSources()
 executeInput()
