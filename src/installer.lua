@@ -86,10 +86,6 @@ function showHelp()
     term.setTextColor(colors.white)
 end
 
-function install(name) 
-    
-end
-
 function showList()
     for name, table in pairs(programs) do
         term.setTextColor(colors.green)
