@@ -29,7 +29,7 @@ function loadSources()
     end
 end
 
-function startupInstall(program)
+function install(program)
     if programs[program] == nil then
         error("Program '" .. program .. "' does not exists!")
     end
@@ -43,16 +43,32 @@ function startupInstall(program)
     sfile.write(startup)
     sfile.close()
     
+    libraries = {}
+    
     programName = ""
     programPath = ""
     for k, v in ipairs(programs[program]["files"]) do
         if v.type == "program" then
            programPath = v.link 
            programName = v.name
+        elseif v.type == "api" then
+            table.insert(libraries, v)
         end
     end
     
+    for k, v in ipairs(libraries) do
+        term.setTextColor(colors.yellow)
+        print("Downloading library ".. v.name .."...")
+        shell.run("wget ".. v.link .." ".. program .."/api/".. libraries.name)
+        term.setTextColor(colors.lime)
+        print("Downloaded library ".. v.name)
+    end
+    
+    term.setTextColor(colors.yellow)
+    print("Downloading program ".. program .."...")
     shell.run("wget ".. programPath .." ".. program .."/".. programName)
+    term.setTextColor(colors.lime)
+    print("Successfully installed ".. program)
 end
 
 function showHelp()
@@ -94,7 +110,7 @@ function executeInput()
     elseif #args >= 1 and args[1] == "list" then
         showList()
     elseif #args >= 1 and args[1] == "install" then
-        startupInstall(args[2])
+        install(args[2])
     elseif #args >= 1 and args[1] == "update" then
 
     elseif #args >= 1 and args[1] == "delete" then
