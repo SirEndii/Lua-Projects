@@ -59,7 +59,7 @@ function install(program)
     for k, v in ipairs(libraries) do
         term.setTextColor(colors.yellow)
         print("Downloading library ".. v.name .."...")
-        shell.run("wget ".. v.link .." ".. program .."/api/".. libraries.name)
+        shell.run("wget ".. v.link .." ".. program .."/api/".. v.name)
         term.setTextColor(colors.lime)
         print("Downloaded library ".. v.name)
     end
