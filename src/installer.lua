@@ -6,8 +6,6 @@
 
 local githuburl = "https://raw.githubusercontent.com/Seniorendi/Lua-Projects/master/src/Programs.txt"
 
---TODO: Safe this in a file
-
 programs = {}
 
 local args = { ... }
@@ -64,6 +62,10 @@ function showHelp()
     term.setTextColor(colors.white)
 end
 
+function install(name) 
+    
+end
+
 function showList()
     for name, table in pairs(programs) do
         term.setTextColor(colors.green)
@@ -84,7 +86,7 @@ function executeInput()
     elseif #args >= 1 and args[1] == "list" then
         showList()
     elseif #args >= 1 and args[1] == "install" then
-        --Install the shit
+        startupInstall(args[2])
     elseif #args >= 1 and args[1] == "update" then
 
     elseif #args >= 1 and args[1] == "delete" then
