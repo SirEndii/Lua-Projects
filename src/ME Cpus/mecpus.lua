@@ -21,7 +21,7 @@ local label = "ME Crafting CPUs"
 
 local monX, monY
 
-os.loadAPI("bars")
+os.loadAPI("mecpus/api/bars.lua")
 
 function prepareMon()
     mon.clear()
