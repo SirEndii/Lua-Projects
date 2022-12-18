@@ -108,11 +108,11 @@ function executeInput()
     elseif #args >= 1 and args[1] == "install" then
         install(args[2])
     elseif #args >= 1 and args[1] == "update" then
-
+        exit("Not implemented", false)
     elseif #args >= 1 and args[1] == "delete" then
-
+        exit("Not implemented", false)
     elseif #args >= 1 and args[1] == "config" then
-
+        exit("Not implemented", false)
     elseif #args >= 1 then
         exit("Could not find command '" .. args[1] .. "'", false)
     end
