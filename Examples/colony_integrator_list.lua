@@ -1,6 +1,6 @@
 ---
 --- Made for the Advanced Peripherals documentation
---- Created by Srendi.
+--- Created by Srendi - Created by Srendi - https://github.com/SirEndii
 --- DateTime: 25.04.2021 20:44
 --- Link: https://docs.srendi.de/peripherals/colony_integrator/
 ---

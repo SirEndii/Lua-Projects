@@ -4,6 +4,9 @@
 --- DateTime: 01.05.2021 23:47
 ---
 
+-- Some shit I worked on in the past
+-- Does not have any usage currently
+
 function wrapPs(peripheralName)
     periTab={}
     sideTab={}

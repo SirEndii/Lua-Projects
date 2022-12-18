@@ -15,4 +15,18 @@
             modem = true,
         }
     }
+    meautocraft = {
+        name = "ME Autocrafting Autocraft",
+        desc = "Autocrafts specific items. Alternative for crafting cards.",
+        path = "meautocraft",
+        version = "1.0.0",
+        startup = "shell.run('meautocraft/meautocraft.lua')",
+        files = {
+            {link="https://raw.githubusercontent.com/Seniorendi/Lua-Projects/master/src/ME%20Autocraft/meautocraft.lua", name = "meautocraft.lua", type = "program"},
+        },
+        needs = {
+            monitor = true,
+            modem = true,
+        }
+    }
 }
