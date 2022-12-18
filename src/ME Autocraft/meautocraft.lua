@@ -30,7 +30,7 @@ function checkMe(checkName, name, low)
             row = row + 1
             CenterT(name, row, colors.black, colors.lightGray, "left", false)
             --Number of items in the system lower than the minimum amount?
-            if tonumber(size) <= tonumber(low) then
+            if tonumber(size) < tonumber(low) then
                 --Craft us some delicious items
                 CenterT(size .. "/" .. low, row, colors.black, colors.red, "right", true)
                 --If the items is already being crafted - don't start a new crafting job
