@@ -1,7 +1,9 @@
 ---
 --- Made for the Advanced Peripherals documentation - Can be used in production
---- Created by Srendi - https://github.com/SirEndii
+--- Initial scrip created by Srendi - https://github.com/SirEndii
 --- DateTime: 18.12.2022 04:00
+--- Modified by Samamstar
+--- DateTime: I dunno, like today-ish
 --- Link: https://docs.intelligence-modding.de/1.18/peripherals/me_bridge/
 ---
 
@@ -11,40 +13,35 @@ me = peripheral.find("meBridge") --MeBridge
 mon = peripheral.find("monitor") --Monitor
 
 --List of the items which should be checked
---Display Name - Technical Name - Minimum Amount
-meItems = {
-    [1] = {"Oak Planks", "minecraft:oak_planks", "180"},
-    [2] = {"Diorite", "minecraft:polished_diorite", "100"},
-    [3] = {"Wind Generator", "mekanismgenerators:wind_generator", "20"},
-    [4] = {"Glass", "minecraft:glass", "500"},
-    [5] = {"Stick", "minecraft:stick", "100"}
-}
+
+itemlist = fs.open("items.txt","r")
+meItems = textutils.unserialise(itemlist.readAll())
+itemlist.close()
 
 function checkMe(checkName, name, low)
-    melist = me.listCraftableItems()
-    for a = 1, #melist do
-        size = tostring(melist[a].amount)
-        ItemName = melist[a].name
-        --Only craft the items we have in our table
-        if checkName == ItemName then
-            row = row + 1
-            CenterT(name, row, colors.black, colors.lightGray, "left", false)
-            --Number of items in the system lower than the minimum amount?
-            if tonumber(size) < tonumber(low) then
-                --Craft us some delicious items
-                CenterT(size .. "/" .. low, row, colors.black, colors.red, "right", true)
-                --If the items is already being crafted - don't start a new crafting job
-                if not me.isItemCrafting({name = checkName}) then
-                    --Prepare the table for "craftItem"
-                    craftedItem = {name = checkName, count = low - size}
-                    me.craftItem(craftedItem)
-                    print("Crafting some delicious " .. checkName .. " " .. craftedItem.count .. " times")
-                end
-            else
-                --Everything is fine. Print the amount in green
-                CenterT(size .. "/" .. low, row, colors.black, colors.green, "right", true)
-            end
+    meItem = me.getItem({name = checkName})
+    if meItem = nil then
+      print("Failed to locate meItem " .. checkName)
+      return
+    end
+    size = tostring(meItem.amount)
+    ItemName = meItem.name
+    row = row + 1
+    CenterT(name, row, colors.black, colors.lightGray, "left", false)
+    --Number of items in the system lower than the minimum amount?
+    if tonumber(size) < tonumber(low) then
+        --Craft us some delicious items
+        CenterT(size .. "/" .. low, row, colors.black, colors.red, "right", true)
+        --If the items is already being crafted - don't start a new crafting job
+        if not me.isItemCrafting({name = checkName}) then
+            --Prepare the table for "craftItem"
+            craftedItem = {name = checkName, count = low - size}
+            me.craftItem(craftedItem)
+            print("Crafting some delicious " .. checkName .. " " .. craftedItem.count .. " times")
         end
+    else
+        --Everything is fine. Print the amount in green
+        CenterT(size .. "/" .. low, row, colors.black, colors.green, "right", true)
     end
 end
 
@@ -106,5 +103,5 @@ prepareMonitor()
 while true do
     checkTable()
     --Update every 3 seconds
-    sleep(3)
+    sleep(1)
 end
