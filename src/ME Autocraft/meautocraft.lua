@@ -1,10 +1,10 @@
 ---
 --- Made for the Advanced Peripherals documentation - Can be used in production
---- Initial scrip created by Srendi - https://github.com/SirEndii
+--- Created by Srendi - https://github.com/SirEndii
 --- DateTime: 18.12.2022 04:00
---- Modified by Samamstar
---- DateTime: I dunno, like today-ish
 --- Link: https://docs.intelligence-modding.de/1.18/peripherals/me_bridge/
+--- Modified by Samamstar
+--- DateTime: 23.5.2023 03:00 MDT
 ---
 
 label = "Automatic"
@@ -13,13 +13,19 @@ me = peripheral.find("meBridge") --MeBridge
 mon = peripheral.find("monitor") --Monitor
 
 --List of the items which should be checked
-
-itemlist = fs.open("items.txt","r")
-meItems = textutils.unserialise(itemlist.readAll())
-itemlist.close()
+--Display Name - Technical Name - Minimum Amount
+meItems = {
+    [1] = {"Oak Planks", "minecraft:oak_planks", "180"},
+    [2] = {"Diorite", "minecraft:polished_diorite", "100"},
+    [3] = {"Wind Generator", "mekanismgenerators:wind_generator", "20"},
+    [4] = {"Glass", "minecraft:glass", "500"},
+    [5] = {"Stick", "minecraft:stick", "100"}
+}
 
 function checkMe(checkName, name, low)
+    --Get item info from system
     meItem = me.getItem({name = checkName})
+    --Typically caused by typo in item name
     if meItem = nil then
       print("Failed to locate meItem " .. checkName)
       return
