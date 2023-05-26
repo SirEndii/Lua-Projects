@@ -3,6 +3,8 @@
 --- Created by Srendi - https://github.com/SirEndii
 --- DateTime: 18.12.2022 04:00
 --- Link: https://docs.intelligence-modding.de/1.18/peripherals/me_bridge/
+--- Modified by Samamstar
+--- DateTime: 23.5.2023 03:00 MDT
 ---
 
 label = "Automatic"
@@ -21,30 +23,31 @@ meItems = {
 }
 
 function checkMe(checkName, name, low)
-    melist = me.listCraftableItems()
-    for a = 1, #melist do
-        size = tostring(melist[a].amount)
-        ItemName = melist[a].name
-        --Only craft the items we have in our table
-        if checkName == ItemName then
-            row = row + 1
-            CenterT(name, row, colors.black, colors.lightGray, "left", false)
-            --Number of items in the system lower than the minimum amount?
-            if tonumber(size) < tonumber(low) then
-                --Craft us some delicious items
-                CenterT(size .. "/" .. low, row, colors.black, colors.red, "right", true)
-                --If the items is already being crafted - don't start a new crafting job
-                if not me.isItemCrafting({name = checkName}) then
-                    --Prepare the table for "craftItem"
-                    craftedItem = {name = checkName, count = low - size}
-                    me.craftItem(craftedItem)
-                    print("Crafting some delicious " .. checkName .. " " .. craftedItem.count .. " times")
-                end
-            else
-                --Everything is fine. Print the amount in green
-                CenterT(size .. "/" .. low, row, colors.black, colors.green, "right", true)
-            end
+    --Get item info from system
+    meItem = me.getItem({name = checkName})
+    --Typically caused by typo in item name
+    if meItem = nil then
+      print("Failed to locate meItem " .. checkName)
+      return
+    end
+    size = tostring(meItem.amount)
+    ItemName = meItem.name
+    row = row + 1
+    CenterT(name, row, colors.black, colors.lightGray, "left", false)
+    --Number of items in the system lower than the minimum amount?
+    if tonumber(size) < tonumber(low) then
+        --Craft us some delicious items
+        CenterT(size .. "/" .. low, row, colors.black, colors.red, "right", true)
+        --If the items is already being crafted - don't start a new crafting job
+        if not me.isItemCrafting({name = checkName}) then
+            --Prepare the table for "craftItem"
+            craftedItem = {name = checkName, count = low - size}
+            me.craftItem(craftedItem)
+            print("Crafting some delicious " .. checkName .. " " .. craftedItem.count .. " times")
         end
+    else
+        --Everything is fine. Print the amount in green
+        CenterT(size .. "/" .. low, row, colors.black, colors.green, "right", true)
     end
 end
 
@@ -106,5 +109,5 @@ prepareMonitor()
 while true do
     checkTable()
     --Update every 3 seconds
-    sleep(3)
+    sleep(1)
 end
