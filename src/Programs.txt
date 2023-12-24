@@ -28,5 +28,19 @@
             monitor = true,
             modem = true,
         }
+    },
+    medrives = {
+        name = "ME Drives Panel",
+        desc = "Control and inspect your drives",
+        path = "medrives",
+        version = "1.0.0",
+        startup = "shell.run('medrives/medrives.lua')",
+        files = {
+            {link="https://raw.githubusercontent.com/Seniorendi/Lua-Projects/master/src/ME%20Drives/medrives.lua", name = "medrives.lua", type = "program"},
+        },
+        needs = {
+            monitor = true,
+            modem = true,
+        }
     }
 }
