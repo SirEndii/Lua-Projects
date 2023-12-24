@@ -5,9 +5,8 @@
 --- Link: https://docs.intelligence-modding.de/1.18/peripherals/me_bridge/
 ---
 
-mon = peripheral.wrap("top")
-me = peripheral.wrap("right")
-
+mon = peripheral.find("monitor")
+me = peripheral.find("meBridge")
 data = {
     cpus = 0,
     oldCpus = 0,

@@ -37,6 +37,8 @@
         startup = "shell.run('medrives/medrives.lua')",
         files = {
             {link="https://raw.githubusercontent.com/Seniorendi/Lua-Projects/master/src/ME%20Drives/medrives.lua", name = "medrives.lua", type = "program"},
+            {link="https://raw.githubusercontent.com/Seniorendi/Lua-Projects/master/src/api/bars.lua", name = "bars.lua", type = "api"},
+
         },
         needs = {
             monitor = true,

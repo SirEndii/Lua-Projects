@@ -26,7 +26,7 @@ function checkMe(checkName, name, low)
     --Get item info from system
     meItem = me.getItem({name = checkName})
     --Typically caused by typo in item name
-    if meItem = nil then
+    if not meItem then
       print("Failed to locate meItem " .. checkName)
       return
     end
