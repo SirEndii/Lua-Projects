@@ -44,7 +44,7 @@
             monitor = true,
             modem = true,
         }
-    }
+    },
     storagerequester = {
         name = "Storage Requester",
         desc = "Auto Autocrafter for the ME and RS Bridge for 1.21.1 and 0.8",
@@ -52,7 +52,7 @@
         version = "1.0.0",
         startup = "shell.run('storagerequester/storagerequester.lua')",
         files = {
-            {link="https://raw.githubusercontent.com/Seniorendi/Lua-Projects/master/src/Storage%20Requester/storagerequester.lua", name = "storagerequester.lua", type = "program"},
+            {link="https://raw.githubusercontent.com/SirEndii/Lua-Projects/refs/heads/dev/storage-requester/src/Storage%20Requester/storagerequester.lua", name = "storagerequester.lua", type = "program"},
 
         },
         needs = {
