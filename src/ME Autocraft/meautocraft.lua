@@ -30,10 +30,10 @@ function checkMe(checkName, name, low)
       print("Failed to locate meItem " .. checkName)
       return
     end
-    if not meItem.amount then
+    if not meItem.count then
         size = 0
     else
-        size = tostring(meItem.amount)
+        size = tostring(meItem.count)
     end
     ItemName = meItem.name
     row = row + 1
