@@ -4,7 +4,7 @@
 --- DateTime: 02.05.2021 14:48
 ---
 
-local githuburl = "https://raw.githubusercontent.com/Seniorendi/Lua-Projects/master/src/Programs.txt"
+local githuburl = "https://raw.githubusercontent.com/SirEndii/Lua-Projects/refs/heads/master/src/Programs.txt"
 
 programs = {}
 
