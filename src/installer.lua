@@ -4,18 +4,20 @@
 --- DateTime: 02.05.2021 14:48
 ---
 
+--- This script really needs some love - everything is quite primitive and not smart, there are also small bugs with the commands. Also some versioning would be neat
+
 local githuburl = "https://raw.githubusercontent.com/SirEndii/Lua-Projects/refs/heads/master/src/Programs.txt"
 
 programs = {}
 
 local args = { ... }
 
-function exit(message, error)
-    term.setTextColor(error and colors.red or colors.yellow)
-    term.write(message .. "\n")
+function exit(message, isError)
+    term.setTextColor(isError and colors.red or colors.yellow)
+    print(message)
     term.setTextColor(colors.white)
-    if error then
-        shell.exit()
+    if isError then
+        error()
     end
 end
 
@@ -30,15 +32,24 @@ function loadSources()
 end
 
 function install(program)
+    if program == nil then
+        exit("Please specify a program!", true)
+    end
+
     if programs[program] == nil then
-        error("Program '" .. program .. "' does not exists!")
+        exit("Program '" .. program .. "' does not exists!", true)
     end
 
     local startup = programs[program]["startup"]
 
+    if fs.exists(program) then
+        exit("Program is already installed. Either use the 'delete' or 'update' command", true)
+    end
+
     if fs.exists("startup") then
         fs.delete("startup")
     end
+
     local sfile = fs.open("startup", "w")
     sfile.write(startup)
     sfile.close()
@@ -60,8 +71,6 @@ function install(program)
         term.setTextColor(colors.yellow)
         print("Downloading library ".. v.name .."...")
         shell.run("wget ".. v.link .." ".. program .."/api/".. v.name)
-        term.setTextColor(colors.lime)
-        print("Downloaded library ".. v.name)
     end
     
     term.setTextColor(colors.yellow)
@@ -69,6 +78,61 @@ function install(program)
     shell.run("wget ".. programPath .." ".. program .."/".. programName)
     term.setTextColor(colors.lime)
     print("Successfully installed ".. program)
+end
+
+function update(program)
+    delete(program)
+
+    print("Now installing the latest version from github...")
+    install(program)
+end
+
+function delete(program)
+    if program == nil then
+        exit("Please specify a program!", true)
+    end
+
+    term.setTextColor(colors.yellow)
+    print("WARNING: This option is quite primitive. It will uninstall all libraries used by this script even if they are used by others")
+
+    print("Deleting program and libraries for '" .. program .. "'...")
+
+    if programs[program] == nil then
+        exit("Program '" .. program .. "' does not exists!", true)
+    end
+
+    if fs.exists("startup") then
+        fs.delete("startup")
+    end
+
+    libraries = {}
+    
+    programName = ""
+    programPath = ""
+    for k, v in ipairs(programs[program]["files"]) do
+        if v.type == "program" then
+           programPath = v.link 
+           programName = v.name
+        elseif v.type == "api" then
+            print(v)
+            table.insert(libraries, v)
+        end
+    end
+
+    for k, v in ipairs(libraries) do
+        term.setTextColor(colors.yellow)
+        print("Deleting library ".. v.name .."...")
+        shell.run("rm ".. program .."/api/".. v.name)
+        term.setTextColor(colors.lime)
+        print("Deleted library ".. v.name)
+    end
+
+    term.setTextColor(colors.yellow)
+    print("Deleting program ".. program .."...")
+    shell.run("rm ".. program .."/".. programName)
+    shell.run("rm ".. program .."/")
+    term.setTextColor(colors.lime)
+    print("Successfully uninstalled ".. program)
 end
 
 function showHelp()
@@ -108,18 +172,15 @@ function executeInput()
     elseif #args >= 1 and args[1] == "install" then
         install(args[2])
     elseif #args >= 1 and args[1] == "update" then
-        exit("Not implemented", false)
+        update(args[2])
     elseif #args >= 1 and args[1] == "delete" then
-        exit("Not implemented", false)
+        delete(args[2])
     elseif #args >= 1 and args[1] == "config" then
         exit("Not implemented", false)
     elseif #args >= 1 then
-        exit("Could not find command '" .. args[1] .. "'", false)
+        exit("Could not find command '" .. args[1] .. "' or you are missing arguments", false)
     end
 end
 
-if fs.exists("startup") or fs.exists("startup.lua") then
-    exit("Delete the startup file and install this program as installer!", false)
-end
 loadSources()
 executeInput()
