@@ -6,7 +6,7 @@
 
 label = "Requester"
 
-bridge = peripheral.find("meBridge") or peripheral.find("rsBridge") --Bridge
+bridge = peripheral.find("me_bridge") or peripheral.find("rs_bridge") --Bridge
 mon = peripheral.find("monitor") --Monitor
 
 --List of the resources which should be checked
