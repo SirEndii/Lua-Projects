@@ -6,7 +6,7 @@
 ---
 
 mon = peripheral.find("monitor")
-me = peripheral.find("meBridge")
+me = peripheral.find("meBridge") or peripheral.find("me_bridge")
 
 data = {
     drives = 0,
