@@ -39,7 +39,7 @@ function prepare()
 end
 
 function addBars()
-    drives = me.listDrives()
+    drives = me.getDrives()
     data.drives = #drives
     for i=1, #drives do
         x = 3*i
@@ -109,7 +109,7 @@ function roundToDecimal(num, decimalPlaces)
 end
 
 function updateStats()
-    newDrives = me.listDrives()
+    newDrives = me.getDrives()
     data.totalBytes = 0;
     data.usedBytes = 0;
     data.totalCells = 0;
